@@ -1,2 +1,28 @@
-This website does not track you. No cookies. No data collection. No statistics. 100% handcrafted without JavaScript.
+{{ template "base.html" . }} {{ define "title" }} {{ if .IsTor }} {{ GetText .Lang "Congratulations. This browser is configured to use Tor." }} {{ else }} {{ GetText .Lang "Sorry. You are not using Tor." }} {{ end }} {{ end }} {{ define "favicon" }}tor-{{ .OnOff }}.png{{ end }} {{ define "css" }} .on { color: green; } .off { color: red; } .not { color: goldenrod; } .mid { margin: 3em 0; } .mid a { text-decoration: underline; } .small { font-size: 0.8em; } .security { margin: 2em 0; padding: 1em; font-size: 1.4em; color: goldenrod; background-color: ghostwhite; border-radius: 5px; } .security a { color: goldenrod; text-decoration: underline; } .onion { width: 128px; height: 128px; border: 0; text-decoration: none; } #js { font-size: 0.8em; } #donate { background-color: dodgerblue; color: white; text-decoration: none; font-size: 1.4em; font-weight: bold; padding: 0.6em 2.4em; border-radius: 0.2em; display: inline-block; } #links { margin-top: 0.6em; } #links li:after { content: "|"; padding: 0 0.2em; } #links li:last-child:after { content: ""; padding: 0; } {{ end }} {{ define "head" }}
+{{ if .Small }}{{ end }} {{ if And .IsTor .NotUpToDate }}{{ end }} {{ GetText .Lang "This page is also available in the following languages:" }} 
+{{ $i | UnEscaped }}
+ 
+{{ end }} {{ define "body" }} {{ if Not .Small }}  {{ end }}
+{{ if .IsTor }} {{ GetText .Lang "Congratulations. This browser is configured to use Tor." }} {{ else }} {{ GetText .Lang "Sorry. You are not using Tor." }} {{ end }}
+{{ GetText .Lang "Your IP address appears to be: " }} {{ .IP }}
 
+{{ if .IsTor }} {{ if .NotUpToDate }}
+{{ GetText .Lang "There is a security update available for Tor Browser." }}
+{{ GetText .Lang "Click here to go to the download page" | UnEscaped }}
+
+{{ else }} {{ if .NotTBB }}
+{{ GetText .Lang "However, it does not appear to be Tor Browser." }}
+{{ GetText .Lang "Click here to go to the download page" | UnEscaped }}
+
+{{ end }} {{ end }} {{ end }}
+{{ if .IsTor }} {{ GetText .Lang "Please refer to the Tor website for further information about using Tor safely. You are now free to browse the Internet anonymously." | UnEscaped }} {{ GetText .Lang "For more information about this exit relay, see:" }} {{ GetText .Lang "Relay Search" }}. {{ else }} {{ GetText .Lang "If you are attempting to use a Tor client, please refer to the Tor website and specifically the frequently asked questions." | UnEscaped }} {{ end }}
+
+{{ GetText .Lang "Donate to Support Tor" }}
+{{ GetText .Lang "Tor Q&A Site" }}
+{{ GetText .Lang "Volunteer" }}
+{{ GetText .Lang "Run a Relay" }}
+{{ GetText .Lang "Stay Anonymous" }}
+{{ end }} {{ define "foot" }}
+{{ GetText .Lang "JavaScript is disabled." }}
+
+{{ end }}
