@@ -1,0 +1,11 @@
+/public/exit-addresses
+/data
+/check.pid
+/check.log
+/check
+/locale
+/vagrant
+*mem.prof
+*cpu.prof
+*cover.out
+*check.test
